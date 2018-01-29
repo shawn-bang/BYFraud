@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class IpAuthInterceptor extends HandlerInterceptorAdapter {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(IpAuthInterceptor.class);
     private Pattern allowPattern;
     private Pattern denyPattern;
 
