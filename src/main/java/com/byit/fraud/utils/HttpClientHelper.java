@@ -1,6 +1,6 @@
 package com.byit.fraud.utils;
 
-import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -18,6 +18,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
@@ -93,8 +94,23 @@ public class HttpClientHelper {
 
     }
 
-    public static HttpClient getHttpClient(int retryTimes, int retryIntervalMs, boolean disableAutoRedirect){
-        CredentialsProvider credsProvider = null;
+    public CookieStoreRestTemplate getRestTemplate(int retryTimes, boolean disableAutoRedirect, int connectTimeout, int readTimeout, CookieStore cookieStore) {
+        HttpClient httpClient = generateClient(retryTimes, disableAutoRedirect);
+
+        // 添加内容转换器
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        messageConverters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
+        messageConverters.add(new FormHttpMessageConverter());
+        messageConverters.add(new MappingJackson2XmlHttpMessageConverter());
+        messageConverters.add(new MappingJackson2HttpMessageConverter());
+        messageConverters.add(new ByteArrayHttpMessageConverter());
+
+        CookieStoreRestTemplate restTemplate = new CookieStoreRestTemplate(httpClient, messageConverters, connectTimeout, readTimeout, cookieStore);
+        restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
+        return restTemplate;
+    }
+
+    private HttpClient generateClient(int retryTimes, boolean disableAutoRedirect){
         HttpClientBuilder httpClientBuilder = HttpClients.custom();
         httpClientBuilder.setSslcontext(sslContext);
         httpClientBuilder.setConnectionManager(connectionManager);
@@ -111,18 +127,6 @@ public class HttpClientHelper {
             httpClientBuilder.setRedirectStrategy(new LaxRedirectStrategy());
         }
         return httpClientBuilder.build();
-    }
-
-    public static List<HttpMessageConverter<?>> getConverters(){
-        // 添加内容转换器
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
-        messageConverters.add(new FormHttpMessageConverter());
-        messageConverters.add(new MappingJackson2XmlHttpMessageConverter());
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
-        messageConverters.add(new ByteArrayHttpMessageConverter());
-
-        return messageConverters;
     }
 
 }
