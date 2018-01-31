@@ -23,6 +23,7 @@
         <httpcomponents.version>4.5.3</httpcomponents.version>
         <json.version>1.2.31</json.version>
         <jdk.version>1.8</jdk.version>
+        <cxf.version>3.0.2</cxf.version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
     </properties>
 
@@ -234,6 +235,31 @@
                                 </resource>
                             </resources>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>http://fna:21036/datasvc/ccapp_rt_match.ddf?wsdl</wsdl>
+                                    <extraargs>
+                                        <extraarg>-autoNameResolution</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
