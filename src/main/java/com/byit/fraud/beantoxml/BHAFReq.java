@@ -5,21 +5,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "BHAFResp")
+@XmlRootElement(name = "BHAFReq")
 @XmlAccessorType(XmlAccessType.NONE)
-public class BHAFResp {
+public class BHAFReq {
 
     @XmlElement(name = "CommonHeader")
     private CommonHeader commonHeader;
     @XmlElement(name = "BizBody")
     private BizBody bizBody;
 
-    public BHAFResp() {
-    }
-
-    public BHAFResp(CommonHeader commonHeader, BizBody bizBody) {
-        this.commonHeader = commonHeader;
-        this.bizBody = bizBody;
+    public BHAFReq() {
     }
 
     public CommonHeader getCommonHeader() {
@@ -37,4 +32,5 @@ public class BHAFResp {
     public void setBizBody(BizBody bizBody) {
         this.bizBody = bizBody;
     }
+
 }
