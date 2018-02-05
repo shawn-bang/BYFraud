@@ -32,6 +32,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>-->
     <mvc:default-servlet-handler />
+    <!--<mvc:annotation-driven />-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -47,6 +48,7 @@
                 <bean class="org.springframework.http.converter.StringHttpMessageConverter" />
                 <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
                 <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
                 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                     <property name="prefixJson" value="false" />
                     <property name="supportedMediaTypes" value="application/json" />
