@@ -37,19 +37,32 @@ public class GeneralController {
         return response;
     }
 
+    /**
+     * kangzd
+     * 接收xml格式请求报文，转换为JavaBean
+     */
+    @RequestMapping(value = "/xmlToJava", method = RequestMethod.POST)
+    @ResponseBody
+    public void xmlToJava(@RequestBody BHAFReq bhafReq) {
+        System.out.println("xmlToJava 测试开始");
+        System.out.println(bhafReq);
+        System.out.println("xmlToJava 测试结束");
+    }
 
     /**
      * chenzht
-     *响应报文返回xml格式
+     * 响应报文返回xml格式
      */
-    @RequestMapping(value = "/javaToXml",method = RequestMethod.POST)
+    @RequestMapping(value = "/javaToXml", method = RequestMethod.POST)
     @ResponseBody
-    public BHAFResp XmlToJavaBean(){
-        System.out.println("测试来了");
-        CommonHeader header = new CommonHeader("747474747","asdfsd","hello msg","a32423423","2321123","ewr324234","213234234","234234234","234234");
-        ApplicationInfos applicationInfos = new ApplicationInfos("wq32ed","23dddd","234fdfdfd","23fdd",new Date(),"45fd","sdf23223","2134dsfsd","12dsfsd","123ds","123dsfr3","123er213");
+    public BHAFResp javaToXml() {
+        System.out.println("javaToXml 测试开始");
+        CommonHeader header = new CommonHeader("747474747", "asdfsd", "hello msg", "a32423423", "2321123", "ewr324234", "213234234", "234234234", "234234");
+        ApplicationInfos applicationInfos = new ApplicationInfos("wq32ed", "23dddd", "234fdfdfd", "23fdd", new Date(), "45fd", "sdf23223", "2134dsfsd", "12dsfsd", "123ds", "123dsfr3", "123er213");
         BizBody body = new BizBody(applicationInfos);
-        BHAFResp bhafResp = new BHAFResp(header,body);
+        BHAFResp bhafResp = new BHAFResp(header, body);
+        System.out.println("javaToXml 测试结束");
         return bhafResp;
     }
+
 }
