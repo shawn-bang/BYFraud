@@ -8,5 +8,14 @@
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
     <!--  Cxf WebService 服务端示例 -->
-    <jaxws:endpoint id="DemoWebservice" implementor="com.byit.fraud.webservice.impl.DemoWebserviceImpl" address="/hello" />
+    <jaxws:endpoint id="DemoWebservice" implementor="com.byit.fraud.webservice.impl.DemoWebserviceImpl" address="/hello">
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+            <bean class="com.byit.fraud.interceptor.ArtifactInInterceptor"/>
+        </jaxws:inInterceptors>
+        <jaxws:outInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+            <bean class="com.byit.fraud.interceptor.ArtifactOutInterceptor"/>
+        </jaxws:outInterceptors>
+    </jaxws:endpoint>
 </beans>
