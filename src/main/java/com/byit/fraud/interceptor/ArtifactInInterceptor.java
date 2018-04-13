@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by shawn on 2018/04/3.
- * Solve Problem:Customize request xml content style
+ * Desc    : Solve Problem:Customize request xml content style
+ * @author : shawn
+ * @date   : 2018/4/3 17:11
  */
 public class ArtifactInInterceptor extends AbstractPhaseInterceptor<Message> {
 	private final Logger logger = LoggerFactory.getLogger(ArtifactInInterceptor.class);

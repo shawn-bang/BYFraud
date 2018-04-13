@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.regex.Pattern;
 
 /**
- * Created by shawn on 2018/01/24.
+ * Desc    : Sometime Client need to auth
+ * @author : shawn
+ * @date   : 2018/4/13 17:27
  */
 public class IpAuthInterceptor extends HandlerInterceptorAdapter {
 

@@ -15,8 +15,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * Created by shawn on 2018/04/3.
- * Solve Problem:Customize response xml content style
+ * Desc    : Solve Problem:Customize response xml content style
+ * @author : shawn
+ * @date   : 2018/4/3 17:10
  */
 public class ArtifactOutInterceptor extends AbstractPhaseInterceptor<Message> {
 	private final Logger logger = LoggerFactory.getLogger(ArtifactOutInterceptor.class);

@@ -6,9 +6,15 @@ import javax.jws.WebService;
 import com.byit.fraud.dto.Out;
 import com.byit.fraud.webservice.DemoWebservice;
 
+/**
+ * Desc    : CXF Demo WebService Implement
+ * @author : shawn
+ * @date   : 2018/4/13 17:12
+ */
 @WebService(endpointInterface = "com.byit.fraud.webservice.DemoWebservice", serviceName = "DemoWebservice")
 public class DemoWebserviceImpl implements DemoWebservice {
 
+	@Override
 	@WebMethod
 	public Out checkRulesRealTime(String AppId, String RequestTimeStamp, String EsbMsgID) {
 		Out out = new Out();
